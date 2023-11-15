@@ -1,10 +1,12 @@
-"use strict"
+"use strict";
+
 console.log("Let's get this party started!");
 
 
 /** event listern on the submit button in the form to prevent default refreshes
- * and invoke reuestGiphy
+ * and invoke requestGiphy
  */
+//TODO: Refactor to do listener on form submission
 $(".submit").on("click", function (evt){
   evt.preventDefault();
   requestGiphy();
@@ -20,6 +22,8 @@ async function requestGiphy(){
   const input = $("#search").val();
   console.log(input);
 
+  //TODO: Refactor to have the params also take in the api key and make it an object
+
   const params = new URLSearchParams(input);
   console.log(params)
 
@@ -28,7 +32,9 @@ async function requestGiphy(){
     { method: "GET" });
   let gifData = await response.json();
 
-  console.log(gifData.data[0].embed_url);
+  //TODO: Can refactor to grab a random gif
+
+  console.log(gifData);
 
   let gif = gifData.data[0];
 
@@ -42,7 +48,9 @@ async function requestGiphy(){
  */
 
 function updateHTMLGif(url) {
-  let $img = $("<iframe></iframe>").attr({"src": `${url}`, "frameBorder": "0"});
+  //TODO: Refactor to grab img url rather than the embed url
+  // let $img = $("<iframe></iframe>").attr({"src": `${url}`, "frameBorder": "0"});
+  let $img = $("<img>").attr("src", `${url}`);
   $(".gif-container").append($img);
 }
 
